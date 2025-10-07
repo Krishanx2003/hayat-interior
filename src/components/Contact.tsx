@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
-import Link from 'next/link';
 import WhatsAppClick from './WhatsAppClick';
 
 export default function Contact() {
@@ -42,7 +41,7 @@ export default function Contact() {
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch ( error)  {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

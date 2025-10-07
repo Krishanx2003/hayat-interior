@@ -61,7 +61,7 @@ export default function AdminDashboard() {
         } else {
           setError('Failed to load bookings');
         }
-      } catch (err) {
+      } catch (error) {
         setError('An error occurred while fetching data');
       } finally {
         setIsLoading(false);

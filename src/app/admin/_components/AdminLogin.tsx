@@ -35,7 +35,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
         const data = await response.json();
         setError(data.error || 'Invalid username or password');
       }
-    } catch (error) {
+    } catch (error ) {
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);

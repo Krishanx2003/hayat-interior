@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, MapPin } from "lucide-react"
-
+import Image from "next/image"
 import WhatsAppClick from "@/components/WhatsAppClick"
 import { categories, projects } from "@/lib/portfolio-data"
 
@@ -58,7 +58,9 @@ export default function PortfolioPage() {
             >
               <Card className="overflow-hidden transition hover:shadow-md">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <img
+                  <Image
+                    width={1000}
+                    height={1000}
                     src={p.images[0] || "/placeholder.svg"}
                     alt={p.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

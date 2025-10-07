@@ -1,7 +1,6 @@
 import React from 'react';
-import { Home, ChefHat, Building, Wrench, Palette, Sofa, ArrowRight } from 'lucide-react';
+import { Home, ChefHat, Building, Wrench, Palette, Sofa } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function Services() {
   const services = [

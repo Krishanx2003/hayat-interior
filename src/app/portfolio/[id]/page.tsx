@@ -6,9 +6,11 @@ import Footer from "@/components/Footer"
 import WhatsAppClick from "@/components/WhatsAppClick"
 import { MapPin, Calendar, Square, Clock, ArrowLeft } from "lucide-react"
 import { projects } from "@/lib/portfolio-data"
+import Image from "next/image"
 
-export default function ProjectDetailPage({ params }: { params: { id: string } }) {
-  const project = projects.find((p) => p.id === params.id)
+export default async function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const project = projects.find((p) => p.id === id)
   if (!project) return notFound()
 
   return (
@@ -17,7 +19,9 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
       <main className="pt-2">
         {/* Hero */}
         <section className="relative h-[360px] sm:h-[420px] overflow-hidden">
-          <img
+          <Image
+            width={1000}
+            height={1000}
             src={project.images[0] || "/placeholder.svg"}
             alt={project.title}
             className="h-full w-full object-cover"
@@ -127,7 +131,9 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <div className="grid gap-4 sm:grid-cols-2">
               {project.images.slice(1).map((src, i) => (
                 <div key={i} className="aspect-video overflow-hidden rounded-lg">
-                  <img
+                  <Image
+                    width={1000}
+                    height={1000}
                     src={src || "/placeholder.svg"}
                     alt={`${project.title} - Image ${i + 2}`}
                     className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"

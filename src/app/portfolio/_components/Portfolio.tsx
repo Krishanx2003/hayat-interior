@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import WhatsAppClick from '@/components/WhatsAppClick';
-
+import Image from 'next/image';
+  
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -111,7 +112,9 @@ const Portfolio = () => {
               className="portfolio-card group animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <img
+              <Image
+                width={1000}
+                height={1000}
                 src={project.image}
                 alt={project.title}
                 className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
