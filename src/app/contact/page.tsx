@@ -55,16 +55,12 @@ const ContactUs = () => {
   };
 
   const validateStep1 = () => {
-    if (
-      !formData.name ||
-      !formData.contact ||
-      !formData.email ||
-      !formData.address ||
-      !formData.projectType ||
-      !formData.propertyType
-    ) {
-      alert("Please fill in all required fields");
-      return false;
+    const requiredFields = ["name", "contact", "email", "address", "projectType", "propertyType"];
+    for (const field of requiredFields) {
+      if (!formData[field as keyof FormData]) {
+        alert("Please fill in all required fields");
+        return false;
+      }
     }
     return true;
   };
@@ -83,7 +79,6 @@ const ContactUs = () => {
       const result = await response.json();
 
       if (!response.ok) {
-        console.error("API Error:", result.error);
         alert(result.error || "Failed to submit form. Please try again.");
         return;
       }
@@ -108,7 +103,7 @@ const ContactUs = () => {
         setIsSubmitted(false);
       }, 3000);
     } catch (err) {
-      console.error("Unexpected error:", err);
+      console.error(err);
       alert("There was an error submitting the form. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -226,7 +221,7 @@ const ContactUs = () => {
         </div>
       </section>
 
-      {/* Form Section (same logic, text updated) */}
+      {/* Form Section */}
       <section className="max-w-5xl mx-auto mt-24 px-6 md:px-12">
         <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100">
           {!isSubmitted ? (
@@ -243,8 +238,126 @@ const ContactUs = () => {
                 </p>
               </div>
 
-              {/* Steps & Form - unchanged */}
-              {/* ... keep your step and form code same ... */}
+              {/* Step-based Form */}
+              {step === 1 && (
+                <div className="flex flex-col gap-4">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name *"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <input
+                    type="text"
+                    name="contact"
+                    placeholder="Contact Number *"
+                    value={formData.contact}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email *"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <input
+                    type="text"
+                    name="address"
+                    placeholder="Address *"
+                    value={formData.address}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <input
+                    type="text"
+                    name="projectType"
+                    placeholder="Project Type *"
+                    value={formData.projectType}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <input
+                    type="text"
+                    name="propertyType"
+                    placeholder="Property Type *"
+                    value={formData.propertyType}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <button
+                    type="button"
+                    onClick={nextStep}
+                    className="bg-[#996830] text-white p-3 rounded-lg mt-4"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+
+              {step === 2 && (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <input
+                    type="text"
+                    name="totalArea"
+                    placeholder="Total Area (sq.ft)"
+                    value={formData.totalArea}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <input
+                    type="text"
+                    name="numRooms"
+                    placeholder="Number of Rooms"
+                    value={formData.numRooms}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <input
+                    type="text"
+                    name="budget"
+                    placeholder="Budget"
+                    value={formData.budget}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <input
+                    type="text"
+                    name="timeline"
+                    placeholder="Timeline"
+                    value={formData.timeline}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <textarea
+                    name="message"
+                    placeholder="Additional Message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="border p-3 rounded-lg"
+                  />
+                  <div className="flex gap-4 mt-4">
+                    <button
+                      type="button"
+                      onClick={prevStep}
+                      className="bg-gray-300 text-gray-700 p-3 rounded-lg"
+                    >
+                      Back
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="bg-[#996830] text-white p-3 rounded-lg"
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
+                    </button>
+                  </div>
+                </form>
+              )}
             </>
           ) : (
             <div className="text-center py-12 animate-fadeIn">
@@ -266,9 +379,6 @@ const ContactUs = () => {
           )}
         </div>
       </section>
-
-      {/* Map Section */}
-     
     </div>
   );
 };
