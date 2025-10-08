@@ -1,0 +1,276 @@
+"use client";
+
+import React, { useState } from "react";
+import Image from "next/image";
+import { MapPin, Mail, Phone, CheckCircle2 } from "lucide-react";
+
+interface FormData {
+  name: string;
+  contact: string;
+  email: string;
+  address: string;
+  projectType: string;
+  propertyType: string;
+  totalArea: string;
+  numRooms: string;
+  budget: string;
+  timeline: string;
+  message: string;
+}
+
+const ContactUs = () => {
+  const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    contact: "",
+    email: "",
+    address: "",
+    projectType: "",
+    propertyType: "",
+    totalArea: "",
+    numRooms: "",
+    budget: "",
+    timeline: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const nextStep = () => {
+    if (validateStep1()) {
+      setStep(2);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const prevStep = () => {
+    setStep(1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const validateStep1 = () => {
+    if (
+      !formData.name ||
+      !formData.contact ||
+      !formData.email ||
+      !formData.address ||
+      !formData.projectType ||
+      !formData.propertyType
+    ) {
+      alert("Please fill in all required fields");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error("API Error:", result.error);
+        alert(result.error || "Failed to submit form. Please try again.");
+        return;
+      }
+
+      setIsSubmitted(true);
+
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          contact: "",
+          email: "",
+          address: "",
+          projectType: "",
+          propertyType: "",
+          totalArea: "",
+          numRooms: "",
+          budget: "",
+          timeline: "",
+          message: "",
+        });
+        setStep(1);
+        setIsSubmitted(false);
+      }, 3000);
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      alert("There was an error submitting the form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="py-20 bg-gradient-to-b from-[#fffefa] to-[#fff9f0] w-full min-h-screen">
+      {/* Intro Section */}
+      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-24">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Info Section */}
+          <div className="flex flex-col justify-center gap-10">
+            <div>
+              <h1 className="font-bold text-[#18191f] text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
+                Let’s Design Your Perfect Space
+              </h1>
+              <p className="text-[#4a4a4a] text-lg md:text-xl leading-relaxed">
+                At <strong>Hayat Interior</strong>, we turn your dreams into design.  
+                Whether it’s your home, office, or a complete renovation, our expert designers  
+                are here to bring elegance, comfort, and functionality to every corner of your space.
+              </p>
+            </div>
+
+            {/* Contact Info */}
+            <div className="flex flex-col gap-8">
+              <div>
+                <h3 className="font-bold text-[#18191f] text-xl mb-4 flex items-center gap-2">
+                  VISIT OUR STUDIO
+                </h3>
+                <div className="flex items-start gap-4 pl-2">
+                  <MapPin className="text-[#996830] w-6 h-6 mt-1 flex-shrink-0" />
+                  <p className="text-base md:text-lg text-[#4a4a4a] leading-relaxed">
+                    Office No. G-02, Ground Floor,  
+                    <br /> Hayat Interior, Nawada, Delhi NCR
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-[#18191f] text-xl mb-4 flex items-center gap-2">
+                  EMAIL US
+                </h3>
+                <div className="flex items-center gap-4 pl-2">
+                  <Mail className="text-[#996830] w-6 h-6 flex-shrink-0" />
+                  <a
+                    href="mailto:hello@hayatinterior.com"
+                    className="text-base md:text-lg text-[#4a4a4a] hover:text-[#996830] transition-colors"
+                  >
+                    hello@hayatinterior.com
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-[#18191f] text-xl mb-4 flex items-center gap-2">
+                  CALL US
+                </h3>
+                <div className="flex items-center gap-4 pl-2">
+                  <Phone className="text-[#996830] w-6 h-6 flex-shrink-0" />
+                  <a
+                    href="tel:+919876543210"
+                    className="text-base md:text-lg text-[#4a4a4a] hover:text-[#996830] transition-colors"
+                  >
+                    +91 98765 43210
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Image Gallery */}
+          <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-2 gap-4">
+              <Image
+                src="/Images/contact1.png"
+                alt="Luxury Interior Living Room"
+                className="w-full h-64 md:h-72 rounded-2xl object-cover hover:scale-105 transition-transform shadow-lg"
+                width={280}
+                height={280}
+              />
+              <Image
+                src="/Images/contact2.png"
+                alt="Modern Kitchen Design"
+                className="w-full h-64 md:h-72 rounded-2xl object-cover hover:scale-105 transition-transform shadow-lg"
+                width={280}
+                height={280}
+              />
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              <Image
+                src="/Images/contact3.png"
+                alt="Contemporary Bedroom Design"
+                className="w-full h-80 md:h-96 rounded-2xl object-cover hover:scale-105 transition-transform shadow-lg"
+                width={350}
+                height={350}
+              />
+              <Image
+                src="/Images/contact4.png"
+                alt="Luxury Villa Interior"
+                className="w-full h-80 md:h-96 rounded-2xl object-cover hover:scale-105 transition-transform shadow-lg"
+                width={350}
+                height={350}
+              />
+              <Image
+                src="/Images/contact5.png"
+                alt="Elegant Office Space"
+                className="w-full h-80 md:h-96 rounded-2xl object-cover hover:scale-105 transition-transform shadow-lg"
+                width={350}
+                height={350}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Form Section (same logic, text updated) */}
+      <section className="max-w-5xl mx-auto mt-24 px-6 md:px-12">
+        <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100">
+          {!isSubmitted ? (
+            <>
+              <div className="mb-8">
+                <h2 className="text-3xl md:text-4xl font-bold text-[#18191f] mb-4">
+                  Start Your Design Journey with Us
+                </h2>
+                <p className="text-base md:text-lg text-[#5a5a5a] leading-relaxed">
+                  Tell us a bit about your dream project — be it a cozy apartment makeover, 
+                  a luxury villa, or a modern workspace.  
+                  Our <span className="text-[#996830] font-semibold">Hayat Interior</span> experts will connect with you  
+                  within 24 hours for a complimentary consultation.
+                </p>
+              </div>
+
+              {/* Steps & Form - unchanged */}
+              {/* ... keep your step and form code same ... */}
+            </>
+          ) : (
+            <div className="text-center py-12 animate-fadeIn">
+              <div className="flex justify-center mb-6">
+                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                  <CheckCircle2 className="w-12 h-12 text-green-600" />
+                </div>
+              </div>
+              <h3 className="text-3xl font-bold text-[#18191f] mb-4">
+                Thank You for Reaching Out!
+              </h3>
+              <p className="text-lg text-[#5a5a5a] mb-2">
+                Your details have been received successfully.
+              </p>
+              <p className="text-base text-[#5a5a5a]">
+                Our design team will get in touch within 24 hours to discuss your project.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Map Section */}
+     
+    </div>
+  );
+};
+
+export default ContactUs;
