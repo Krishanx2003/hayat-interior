@@ -179,14 +179,14 @@ const ContactUs = () => {
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4">
               <Image
-                src="/Images/contact1.png"
+                  src={ "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"}
                 alt="Luxury Interior Living Room"
                 className="w-full h-64 md:h-72 rounded-2xl object-cover hover:scale-105 transition-transform shadow-lg"
                 width={280}
                 height={280}
               />
               <Image
-                src="/Images/contact2.png"
+                  src={ "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"}
                 alt="Modern Kitchen Design"
                 className="w-full h-64 md:h-72 rounded-2xl object-cover hover:scale-105 transition-transform shadow-lg"
                 width={280}
@@ -196,21 +196,21 @@ const ContactUs = () => {
 
             <div className="grid grid-cols-3 gap-4">
               <Image
-                src="/Images/contact3.png"
+                  src={ "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"}
                 alt="Contemporary Bedroom Design"
                 className="w-full h-80 md:h-96 rounded-2xl object-cover hover:scale-105 transition-transform shadow-lg"
                 width={350}
                 height={350}
               />
               <Image
-                src="/Images/contact4.png"
+                 src={ "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"}
                 alt="Luxury Villa Interior"
                 className="w-full h-80 md:h-96 rounded-2xl object-cover hover:scale-105 transition-transform shadow-lg"
                 width={350}
                 height={350}
               />
               <Image
-                src="/Images/contact5.png"
+                src={ "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"}
                 alt="Elegant Office Space"
                 className="w-full h-80 md:h-96 rounded-2xl object-cover hover:scale-105 transition-transform shadow-lg"
                 width={350}

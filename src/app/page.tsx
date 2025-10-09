@@ -16,7 +16,7 @@ const Home = () => {
               We Create Unique <br /> Designs That Reflect You.
             </h2>
             <Image
-              src="/Images/section2.png"
+              src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
               alt="Unique Interior Design Concepts"
               className="mt-8 mx-auto"
               width={1300}
@@ -45,14 +45,14 @@ const Home = () => {
               </h2>
               <div className="relative w-full h-[480px] overflow-hidden shadow-lg group">
                 <Image
-                  src="/Images/image1.png"
+                  src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"  
                   alt="Villa Furnishing & Interior"
                   width={600}
                   height={400}
                   className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:-translate-y-full"
                 />
                 <Image
-                  src="/Images/variant1.png"
+                  src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
                   alt="Villa Furnishing & Interior Hover"
                   width={600}
                   height={400}
@@ -75,14 +75,14 @@ const Home = () => {
             <div className="flex flex-col gap-10">
               {[
                 {
-                  src: "/Images/image2.png",
+                  src: "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
                   variant: "/Images/variant2.png",
                   alt: "Luxury Hotel Renovation",
                   title: "Luxury Hotel Renovation",
                   desc: "An opulent redesign where sophistication meets comfort, redefining guest experiences with immersive spatial storytelling.",
                 },
                 {
-                  src: "/Images/image3.png",
+                  src: "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
                   variant: "/Images/variant3.png",
                   alt: "Residence Swimming Pool",
                   title: "Residence Swimming Pool",
@@ -92,14 +92,14 @@ const Home = () => {
                 <div key={index} className="flex flex-col">
                   <div className="relative w-full h-[390px] overflow-hidden shadow-lg group">
                     <Image
-                      src={project.src}
+                      src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
                       alt={project.alt}
                       width={600}
                       height={400}
                       className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:-translate-y-full"
                     />
                     <Image
-                      src={project.variant}
+                      src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
                       alt={`${project.alt} Hover`}
                       width={600}
                       height={400}
@@ -132,14 +132,14 @@ const Home = () => {
           </div>
           <div className="flex gap-6">
             <Image
-              src="/Images/lay2.png"
+              src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
               alt="Interior Design Aesthetic"
               height={700}
               width={300}
               className="mb-12"
             />
             <Image
-              src="/Images/lay1.png"
+              src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
               alt="Elegant Interior Mood"
               height={700}
               width={300}
@@ -152,14 +152,14 @@ const Home = () => {
         <section className="relative py-20 px-4 sm:px-8 md:px-30 flex flex-col lg:flex-row items-center justify-between gap-12 bg-[#fffefa]">
           <div className="relative flex-shrink-0">
             <Image
-              src="/Images/layer1.png"
+              src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
               alt="Design Layers Background"
               width={350}
               height={350}
               className="absolute top-16 mt-48 left-0 opacity-80"
             />
             <Image
-              src="/Images/layer2.png"
+              src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
               alt="Design Layers Foreground"
               width={350}
               height={350}
@@ -199,25 +199,25 @@ const Home = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 {
-                  src: "/Images/project1.png",
+                  src: "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
                   alt: "Modern Loft Living Room",
                   title: "Modern Loft Living",
                   comment: "A seamless blend of contemporary form and functional design for urban lifestyles.",
                 },
                 {
-                  src: "/Images/project2.png",
+                  src: "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
                   alt: "Dining Room Design",
                   title: "Rustic Chic Cottage",
                   comment: "A warm blend of rustic textures and modern finishes that feels effortlessly inviting.",
                 },
                 {
-                  src: "/Images/project3.png",
+                  src: "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
                   alt: "Zen Retreat Interior",
                   title: "Zen Garden Retreat",
                   comment: "Minimalist aesthetics meet nature’s calm in this thoughtfully designed sanctuary.",
                 },
                 {
-                  src: "/Images/project4.png",
+                  src: "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
                   alt: "Modern Apartment Design",
                   title: "Modern Loft Renovation",
                   comment: "A redefined living experience crafted with balance, symmetry, and emotion.",
@@ -228,7 +228,7 @@ const Home = () => {
                   className="relative overflow-hidden rounded-xl shadow-md group cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl"
                 >
                   <Image
-                    src={card.src}
+                   src={"https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"}
                     alt={card.alt}
                     width={400}
                     height={400}
@@ -251,12 +251,10 @@ const Home = () => {
         <section className="w-full bg-[#fffefa] py-20 relative">
           <div className="relative w-full flex justify-center items-center mt-10">
             <Image
-              src="/Images/about.png"
-              alt="About Hayat Interior"
+              src={"https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"}
               width={1510}
               height={700}
-              className="w-[1510px] h-[700px] object-cover shadow-lg"
-            />
+              className="w-[1510px] h-[700px] object-cover shadow-lg" alt={''}            />
             <div className="absolute bottom-[-180px] bg-white w-[1300px] flex flex-col lg:flex-row justify-between px-8 sm:px-16 py-14 shadow-lg">
               <div className="w-full lg:w-[35%] relative">
                 <div className="flex items-center gap-4 mb-4">

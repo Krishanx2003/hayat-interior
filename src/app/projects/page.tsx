@@ -154,14 +154,26 @@ const Project = () => {
       description:
         "A warm, modern living space crafted for a young professional couple. The Mehta Residence showcases a balance of comfort and contemporary elegance. We designed the entire home interior, including a modular kitchen, custom furniture, and soft decor elements. The design theme focused on subtle wooden textures, neutral color palettes, and open, airy layouts.",
       location: "Gurgaon - 3BHK Apartment",
-      images: ["/Images/metha1.png", "/Images/mehta2.png", "/Images/mehta3.png", "/Images/mehta4.png"],
+      images: [
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg", 
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+      ],
     },
     {
       title: "Greenleaf Office Renovation",
       description:
         "Greenleaf, a fast-growing eco-consulting firm, approached us with a clear vision — to create a modern, vibrant and sustainable workspace that inspires productivity and well-being. Their old office was dull and overly corporate. Our goal was to reimagine it into a biophilic-inspired environment with minimal waste and maximum creative energy.",
       location: "Noida | 🌿 2500 sq ft. Workspace",
-      images: ["/Images/greenleaf1.png", "/Images/greenleaf2.png", "/Images/greenleaf3.png", "/Images/greenleaf4.png"],
+      images: [
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg", 
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+      ],
     },
     {
       title: "The Kapoor Villa",
@@ -171,12 +183,11 @@ const Project = () => {
       list: "Double-height foyer with a crystal chandelier and gold accents\nA sunken seating area in the living room, designed for elite entertaining\nWalk-in wardrobe with island dresser in the master suite\nIndoor-outdoor transition in dining space via sliding glass walls\nSmart home integration: lighting, blinds, and climate control",
       location: "📍Noida | 🧱 2500 sq. ft. Workspace",
       images: [
-        "/Images/villa1.png",
-        "/Images/villa2.png",
-        "/Images/villa3.png",
-        "/Images/villa4.png",
-        "/Images/villa5.png",
-        "/Images/villa6.png",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg", 
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
       ],
     },
     // ✅ Mehta Residence 2 (3-image layout)
@@ -185,14 +196,20 @@ const Project = () => {
       description:
         "A warm, modern living space crafted for a young professional couple, the Mehta Residence showcases a perfect blend of functionality and elegance. Our team designed the entire home interior, including a modular kitchen, custom furniture, and soft decor elements. The design theme focused on subtle wooden textures, neutral color palettes, and open, clutter-free layouts.",
       location: "📍Gurgaon – 3BHK Apartment",
-      images: ["/Images/house1.png", "/Images/house2.png", "/Images/house4.png"],
+      images: [
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg", 
+        "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+      ],
     },
   ]
 
   return (
     <div className="bg-background w-full min-h-screen relative">
       <section className="relative h-[520px] md:h-[620px]">
-        <video
+        {/* <video
           ref={videoRef}
           className="w-full h-full object-cover"
           src="/Images/project-video.mp4"
@@ -200,7 +217,7 @@ const Project = () => {
           muted
           loop
           aria-label="Featured interior project highlights"
-        />
+        /> */}
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
         <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-foreground text-balance">
@@ -253,18 +270,16 @@ const Project = () => {
             {/* track A */}
             <div className="flex gap-6 min-w-max">
               {[
-                "/Images/slider1.png",
-                "/Images/slider2.png",
-                "/Images/slider3.png",
-                "/Images/slider4.png",
-                "/Images/slider5.png",
+                  "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+                  "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+                  "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
               ].map((src, i) => (
                 <div
                   key={`a-${i}`}
                   className="w-[360px] md:w-[400px] h-[260px] md:h-[300px] bg-card rounded-xl overflow-hidden border border-border shadow-[0_6px_24px_rgba(0,0,0,0.06)] flex-shrink-0 group"
                 >
                   <Image
-                    src={src || "/placeholder.svg"}
+                   src={ "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"}
                     alt={`Interior ${i + 1}`}
                     height={300}
                     width={400}
@@ -276,18 +291,17 @@ const Project = () => {
             {/* track B (duplicate for seamless loop) */}
             <div className="flex gap-6 min-w-max" aria-hidden="true">
               {[
-                "/Images/slider6.png",
-                "/Images/slider7.png",
-                "/Images/slider1.png",
-                "/Images/slider2.png",
-                "/Images/slider3.png",
+                "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+                "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+                "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+             
               ].map((src, i) => (
                 <div
                   key={`b-${i}`}
                   className="w-[360px] md:w-[400px] h-[260px] md:h-[300px] bg-card rounded-xl overflow-hidden border border-border shadow-[0_6px_24px_rgba(0,0,0,0.06)] flex-shrink-0 group"
                 >
                   <Image
-                    src={src || "/placeholder.svg"}
+                    src={ "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"}
                     alt={`Interior alt ${i + 1}`}
                     height={300}
                     width={400}
