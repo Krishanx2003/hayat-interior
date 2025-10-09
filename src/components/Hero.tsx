@@ -8,11 +8,11 @@ export default function Hero() {
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+          src="/home/Stylish modern living room with modular sofa and elegant decor _ Premium AI-generated image.jpeg"
           alt="Modern luxury living room designed by Hayat Interior"
           className="object-cover"
           width={1920}
-          height={1080}
+          height={1000}
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-900/60 to-transparent"></div>

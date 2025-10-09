@@ -16,7 +16,7 @@ const Home = () => {
               We Create Unique <br /> Designs That Reflect You.
             </h2>
             <Image
-              src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
+              src="/Images/section2.png"
               alt="Unique Interior Design Concepts"
               className="mt-8 mx-auto"
               width={1300}
@@ -132,14 +132,14 @@ const Home = () => {
           </div>
           <div className="flex gap-6">
             <Image
-              src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
+             src="/Images/image1.png"
               alt="Interior Design Aesthetic"
               height={700}
               width={300}
               className="mb-12"
             />
             <Image
-              src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
+             src="/Images/variant1.png"
               alt="Elegant Interior Mood"
               height={700}
               width={300}
@@ -152,14 +152,14 @@ const Home = () => {
         <section className="relative py-20 px-4 sm:px-8 md:px-30 flex flex-col lg:flex-row items-center justify-between gap-12 bg-[#fffefa]">
           <div className="relative flex-shrink-0">
             <Image
-              src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
+             src="/Images/image2.png"
               alt="Design Layers Background"
               width={350}
               height={350}
               className="absolute top-16 mt-48 left-0 opacity-80"
             />
             <Image
-              src="https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"
+             src="/Images/variant2.png"
               alt="Design Layers Foreground"
               width={350}
               height={350}
@@ -199,25 +199,25 @@ const Home = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 {
-                  src: "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+                  src: "/Images/project1.png",
                   alt: "Modern Loft Living Room",
                   title: "Modern Loft Living",
                   comment: "A seamless blend of contemporary form and functional design for urban lifestyles.",
                 },
                 {
-                  src: "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+                  src: "/Images/project2.png",
                   alt: "Dining Room Design",
                   title: "Rustic Chic Cottage",
                   comment: "A warm blend of rustic textures and modern finishes that feels effortlessly inviting.",
                 },
                 {
-                  src: "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+                  src: "/Images/project3.png",
                   alt: "Zen Retreat Interior",
                   title: "Zen Garden Retreat",
                   comment: "Minimalist aesthetics meet nature’s calm in this thoughtfully designed sanctuary.",
                 },
                 {
-                  src: "https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg",
+                  src: "/Images/project4.png",
                   alt: "Modern Apartment Design",
                   title: "Modern Loft Renovation",
                   comment: "A redefined living experience crafted with balance, symmetry, and emotion.",
@@ -228,7 +228,7 @@ const Home = () => {
                   className="relative overflow-hidden rounded-xl shadow-md group cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl"
                 >
                   <Image
-                   src={"https://i.pinimg.com/736x/64/52/a6/6452a6bc5e59451b7321c954b03652c0.jpg"}
+                    src= {"/Images/project1.png"}
                     alt={card.alt}
                     width={400}
                     height={400}
