@@ -179,8 +179,8 @@ function App() {
               Our Interior Design Services
             </h1>
             <p className="text-[#18191f] text-lg md:text-2xl lg:text-[28px] leading-relaxed text-center max-w-3xl">
-              From cozy homes to smart commercial spaces — we design it all
-            </p>
+  From cozy homes to smart commercial spaces &mdash; we design it all
+</p>
           </div>
         </div>
 
@@ -197,9 +197,9 @@ function App() {
             Renovation & Space Makeover
           </h2>
           <p className="text-[#666] text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
-            Whether it's a single room or your whole home, we redesign with a
-            modern, aesthetic, and super-functional approach.
-          </p>
+  Whether it&apos;s a single room or your whole home, we redesign with a
+  modern, aesthetic, and super-functional approach.
+</p>
         </div>
 
         <div
