@@ -56,3 +56,25 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    const { data, error } = await supabase
+      .from("contact_inquiries")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Supabase fetch error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ inquiries: data }, { status: 200 });
+  } catch (err) {
+    console.error("API error:", err);
+    return NextResponse.json(
+      { error: "Something went wrong while fetching contact inquiries" },
+      { status: 500 }
+    );
+  }
+}

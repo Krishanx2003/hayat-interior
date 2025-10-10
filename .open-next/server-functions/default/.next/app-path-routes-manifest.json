@@ -3,7 +3,7 @@
   "/favicon.ico/route": "/favicon.ico",
   "/_not-found/page": "/_not-found",
   "/contact/page": "/contact",
+  "/services/page": "/services",
   "/page": "/",
-  "/projects/page": "/projects",
-  "/services/page": "/services"
+  "/projects/page": "/projects"
 }
