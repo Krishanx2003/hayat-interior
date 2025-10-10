@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image"; // Add this import
 import { ChevronDown } from "lucide-react";
 
 type ServiceCardProps = {
@@ -13,10 +14,13 @@ const ServiceCard = ({ image, alt, title, description }: ServiceCardProps) => {
   return (
     <div className="overflow-hidden shadow-[0px_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0px_8px_30px_rgba(153,104,48,0.15)] transition-shadow duration-300 group relative h-[500px] bg-white">
       <div className="absolute inset-0 flex flex-col">
-        <img
+        <Image
           src={image}
           alt={alt}
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={false}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-white p-6 transition-all duration-700 ease-in-out opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
           <h3 className="font-bold text-[#18191f] text-2xl mb-3">
@@ -48,11 +52,14 @@ const RenovationCard = ({ image, title, description, isActive }: RenovationCardP
       <div className="max-w-[900px] mx-auto bg-white overflow-hidden">
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="w-full md:w-1/2 p-8">
-            <div className="overflow-hidden shadow-lg rounded-lg">
-              <img
+            <div className="overflow-hidden shadow-lg rounded-lg relative h-[400px]">
+              <Image
                 src={image}
                 alt={title}
-                className="w-full h-[400px] object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority={false}
               />
             </div>
           </div>
@@ -117,7 +124,7 @@ function App() {
       image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800",
       title: "Smart Home Interior",
       description:
-        "Integrate cutting-edge technology seamlessly into your interiors for modern, connected living.",
+        "Integrate cutting-edge technology seamlessly into your interiors for modern, removed connected living.",
     },
     {
       image: "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800",
