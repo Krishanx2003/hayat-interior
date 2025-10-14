@@ -52,7 +52,8 @@
       "loaderFile": "",
       "domains": [
         "images.pexels.com",
-        "i.pinimg.com"
+        "i.pinimg.com",
+        "ylzposuphnhqsvybpgao.supabase.co"
       ],
       "disableStaticImages": false,
       "minimumCacheTTL": 60,
@@ -62,7 +63,12 @@
       "dangerouslyAllowSVG": false,
       "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
       "contentDispositionType": "attachment",
-      "remotePatterns": [],
+      "remotePatterns": [
+        {
+          "protocol": "https",
+          "hostname": "**"
+        }
+      ],
       "unoptimized": false
     },
     "devIndicators": {
@@ -84,7 +90,7 @@
     "serverRuntimeConfig": {},
     "publicRuntimeConfig": {},
     "reactProductionProfiling": false,
-    "reactStrictMode": null,
+    "reactStrictMode": true,
     "reactMaxHeadersLength": 6000,
     "httpAgentOptions": {
       "keepAlive": true
@@ -290,6 +296,7 @@
     "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight",
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts",
+    "swcMinify": true,
     "turbopack": {
       "root": "/Users/krishan/Projects/hayat-interior"
     }

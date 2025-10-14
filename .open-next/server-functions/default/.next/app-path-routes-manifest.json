@@ -1,9 +1,12 @@
 {
   "/api/contact/route": "/api/contact",
-  "/favicon.ico/route": "/favicon.ico",
   "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/api/hero/image/route": "/api/hero/image",
   "/contact/page": "/contact",
-  "/services/page": "/services",
   "/page": "/",
-  "/projects/page": "/projects"
+  "/projects/page": "/projects",
+  "/services/page": "/services",
+  "/admin/hero/page": "/admin/hero",
+  "/admin/contact/page": "/admin/contact"
 }
