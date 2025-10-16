@@ -10,7 +10,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: "/admin/hero", label: "Hero" },
     { href: "/admin/projects", label: "Projects" },
     { href: "/admin/services", label: "Services" },
-    { href: "/admin/contact", label: "Contact" },
+    { href: "/admin/hero/about_section", label: "about" },
+    { href: "/admin/hero/emotion_section", label: "emotion" },
+    { href: "/admin/hero/intro_section", label: "intro" },
+    { href: "/admin/hero/latest_creations", label: "latest" },
+    { href: "/admin/hero/layers_section", label: "layers" },
   ]
 
   return (

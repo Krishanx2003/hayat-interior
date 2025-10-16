@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image"; // ✅ Import Next.js Image
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,9 +28,9 @@ export default function LatestCreationsAdmin() {
     imageFile?: File | null;
   }>({ id: 0, title: "", comment: "", image_url: "", alt_text: "", sort_order: 0, imageFile: null });
   const [isEditing, setIsEditing] = useState(false);
-  const [preview, setPreview] = useState("");
+  const [preview, setPreview] = useState<string>("");
 
-  // 🔹 Fetch all records
+  // Fetch all records
   const fetchCreations = async () => {
     const res = await fetch("/api/latest-creations");
     const data = await res.json();
@@ -40,7 +41,7 @@ export default function LatestCreationsAdmin() {
     fetchCreations();
   }, []);
 
-  // 🔹 Handle add/update
+  // Handle add/update
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
@@ -49,8 +50,10 @@ export default function LatestCreationsAdmin() {
     formData.append("alt_text", form.alt_text);
     formData.append("sort_order", String(form.sort_order));
     if (form.imageFile) formData.append("image", form.imageFile);
-    if (isEditing) formData.append("id", String(form.id));
-    if (isEditing) formData.append("image_url", form.image_url);
+    if (isEditing) {
+      formData.append("id", String(form.id));
+      formData.append("image_url", form.image_url);
+    }
 
     await fetch("/api/latest-creations", {
       method: isEditing ? "PUT" : "POST",
@@ -63,14 +66,14 @@ export default function LatestCreationsAdmin() {
     fetchCreations();
   };
 
-  // 🔹 Handle edit
+  // Handle edit
   const handleEdit = (item: Creation) => {
     setForm({ ...item, imageFile: null });
     setPreview(item.image_url);
     setIsEditing(true);
   };
 
-  // 🔹 Handle delete
+  // Handle delete
   const handleDelete = async (id: number) => {
     if (!confirm("Are you sure you want to delete this entry?")) return;
     await fetch("/api/latest-creations", {
@@ -81,7 +84,7 @@ export default function LatestCreationsAdmin() {
     fetchCreations();
   };
 
-  // 🔹 Handle file selection
+  // Handle file selection
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     setForm({ ...form, imageFile: file });
@@ -99,7 +102,11 @@ export default function LatestCreationsAdmin() {
             <Input placeholder="Alt Text" value={form.alt_text} onChange={(e) => setForm({ ...form, alt_text: e.target.value })} />
             <Input type="number" placeholder="Sort Order" value={form.sort_order} onChange={(e) => setForm({ ...form, sort_order: Number(e.target.value) })} />
             <Input type="file" accept="image/*" onChange={handleFileChange} />
-            {preview && <img src={preview} alt="Preview" className="w-32 mt-2 rounded-md" />}
+            {preview && (
+              <div className="w-32 mt-2 relative h-32">
+                <Image src={preview} alt="Preview" fill className="object-cover rounded-md" />
+              </div>
+            )}
             <Button type="submit">{isEditing ? "Update" : "Add"}</Button>
           </form>
         </CardContent>
@@ -113,7 +120,11 @@ export default function LatestCreationsAdmin() {
               <div>
                 <h3 className="font-semibold">{item.title}</h3>
                 <p className="text-sm text-gray-600">{item.comment}</p>
-                {item.image_url && <img src={item.image_url} alt={item.alt_text} className="w-32 mt-2 rounded-md" />}
+                {item.image_url && (
+                  <div className="w-32 mt-2 relative h-32">
+                    <Image src={item.image_url} alt={item.alt_text} fill className="object-cover rounded-md" />
+                  </div>
+                )}
                 <p className="text-xs text-gray-500">Sort Order: {item.sort_order}</p>
               </div>
               <div className="space-x-2">

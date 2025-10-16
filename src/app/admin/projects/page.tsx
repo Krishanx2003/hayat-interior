@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export default function AdminProjectsPage() {
@@ -18,9 +19,7 @@ export default function AdminProjectsPage() {
 
   // Handle file selection
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setImages(Array.from(e.target.files));
-    }
+    if (e.target.files) setImages(Array.from(e.target.files));
   };
 
   // Remove a selected image
@@ -29,7 +28,7 @@ export default function AdminProjectsPage() {
   };
 
   // Handle form submit
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (images.length === 0) {
       setMessage("❌ Please select at least one image.");
@@ -48,13 +47,8 @@ export default function AdminProjectsPage() {
       formData.append("location", location);
       images.forEach((file) => formData.append("images", file));
 
-      const res = await fetch("/api/projects", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await res.json();
-
+      const res = await fetch("/api/projects", { method: "POST", body: formData });
+      const data: { error?: string } = await res.json();
       if (!res.ok) throw new Error(data.error || "Something went wrong");
 
       setMessage("✅ Project uploaded successfully!");
@@ -65,11 +59,15 @@ export default function AdminProjectsPage() {
       setLocation("");
       setImages([]);
 
-      // Refresh project list or page
       router.refresh();
-    } catch (error: any) {
-      console.error("❌ Error uploading project:", error);
-      setMessage(error.message || "Upload failed");
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("❌ Error uploading project:", error.message);
+        setMessage(error.message || "Upload failed");
+      } else {
+        console.error("❌ Unknown error:", error);
+        setMessage("An unknown error occurred.");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -77,9 +75,7 @@ export default function AdminProjectsPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-semibold mb-8">
-        🛠️ Admin Panel — Add Project
-      </h1>
+      <h1 className="text-3xl font-semibold mb-8">🛠️ Admin Panel — Add Project</h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Title */}
@@ -119,7 +115,7 @@ export default function AdminProjectsPage() {
         {/* List */}
         <div>
           <label className="block font-medium mb-1">
-            List (bullet points, new line separated)
+            List (bullet points, newline separated)
           </label>
           <textarea
             className="w-full border border-gray-300 rounded-lg p-2 h-28"
@@ -162,10 +158,11 @@ export default function AdminProjectsPage() {
                   key={idx}
                   className="relative w-24 h-24 border rounded overflow-hidden"
                 >
-                  <img
+                  <Image
                     src={URL.createObjectURL(file)}
                     alt={`Preview ${idx + 1}`}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                   <button
                     type="button"

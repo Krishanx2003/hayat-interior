@@ -11,7 +11,7 @@ export default function AdminServicePage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setMessage(null);
 
@@ -36,7 +36,7 @@ export default function AdminServicePage() {
         body: formData,
       });
 
-      const data = await res.json();
+      const data: { error?: string } = await res.json();
       if (!res.ok) throw new Error(data.error || "Upload failed");
 
       setMessage({ text: `${type} uploaded successfully ✅`, type: "success" });
@@ -44,8 +44,12 @@ export default function AdminServicePage() {
       setTitle("");
       setDescription("");
       setAlt("");
-    } catch (err: any) {
-      setMessage({ text: err.message, type: "error" });
+    } catch (err) {
+      if (err instanceof Error) {
+        setMessage({ text: err.message, type: "error" });
+      } else {
+        setMessage({ text: "An unknown error occurred.", type: "error" });
+      }
     } finally {
       setLoading(false);
     }
@@ -60,14 +64,18 @@ export default function AdminServicePage() {
         <button
           type="button"
           onClick={() => setType("service")}
-          className={`px-4 py-2 rounded-lg border ${type === "service" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
+          className={`px-4 py-2 rounded-lg border ${
+            type === "service" ? "bg-blue-600 text-white" : "bg-white text-gray-700"
+          }`}
         >
           Service
         </button>
         <button
           type="button"
           onClick={() => setType("renovation")}
-          className={`px-4 py-2 rounded-lg border ${type === "renovation" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
+          className={`px-4 py-2 rounded-lg border ${
+            type === "renovation" ? "bg-blue-600 text-white" : "bg-white text-gray-700"
+          }`}
         >
           Renovation
         </button>
@@ -139,7 +147,9 @@ export default function AdminServicePage() {
       {message && (
         <div
           className={`mt-4 p-3 rounded-lg text-center ${
-            message.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+            message.type === "success"
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
           }`}
         >
           {message.text}

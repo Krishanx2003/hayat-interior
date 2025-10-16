@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image"; // ✅ Import Next.js Image
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,7 +28,7 @@ export default function AboutSectionAdmin() {
   const [isEditing, setIsEditing] = useState(false);
   const [preview, setPreview] = useState("");
 
-  // 🔹 Fetch all records
+  // Fetch all records
   const fetchAbout = async () => {
     const res = await fetch("/api/about-section");
     const data = await res.json();
@@ -38,7 +39,7 @@ export default function AboutSectionAdmin() {
     fetchAbout();
   }, []);
 
-  // 🔹 Handle add/update
+  // Handle add/update
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
@@ -62,14 +63,14 @@ export default function AboutSectionAdmin() {
     fetchAbout();
   };
 
-  // 🔹 Handle edit
+  // Handle edit
   const handleEdit = (item: About) => {
     setForm({ ...item, imageFile: null });
     setPreview(item.image_url);
     setIsEditing(true);
   };
 
-  // 🔹 Handle delete
+  // Handle delete
   const handleDelete = async (id: number) => {
     if (!confirm("Are you sure you want to delete this entry?")) return;
     await fetch("/api/about-section", {
@@ -80,7 +81,7 @@ export default function AboutSectionAdmin() {
     fetchAbout();
   };
 
-  // 🔹 Handle local file selection
+  // Handle local file selection
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     setForm({ ...form, imageFile: file });
@@ -97,7 +98,11 @@ export default function AboutSectionAdmin() {
             <Textarea placeholder="Description 1" value={form.description_1} onChange={(e) => setForm({ ...form, description_1: e.target.value })} />
             <Textarea placeholder="Description 2" value={form.description_2} onChange={(e) => setForm({ ...form, description_2: e.target.value })} />
             <Input type="file" accept="image/*" onChange={handleFileChange} />
-            {preview && <img src={preview} alt="Preview" className="w-32 mt-2 rounded-md" />}
+            {preview && (
+              <div className="w-32 mt-2 relative h-32">
+                <Image src={preview} alt="Preview" fill className="object-cover rounded-md" />
+              </div>
+            )}
             <Button type="submit">{isEditing ? "Update" : "Add"}</Button>
           </form>
         </CardContent>
@@ -112,7 +117,11 @@ export default function AboutSectionAdmin() {
                 <h3 className="font-semibold">{item.heading}</h3>
                 <p className="text-sm text-gray-600">{item.description_1}</p>
                 <p className="text-sm text-gray-600">{item.description_2}</p>
-                {item.image_url && <img src={item.image_url} alt="" className="w-32 mt-2 rounded-md" />}
+                {item.image_url && (
+                  <div className="w-32 mt-2 relative h-32">
+                    <Image src={item.image_url} alt={item.heading} fill className="object-cover rounded-md" />
+                  </div>
+                )}
               </div>
               <div className="space-x-2">
                 <Button variant="outline" onClick={() => handleEdit(item)}>Edit</Button>

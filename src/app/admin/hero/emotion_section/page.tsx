@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image"; // ✅ Import Next.js Image
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -31,7 +32,7 @@ export default function EmotionSectionAdmin() {
   const [previewLeft, setPreviewLeft] = useState<string>("");
   const [previewRight, setPreviewRight] = useState<string>("");
 
-  // 🔹 Fetch all records
+  // Fetch all records
   const fetchEmotion = async () => {
     const res = await fetch("/api/emotion-section");
     const data = await res.json();
@@ -42,7 +43,7 @@ export default function EmotionSectionAdmin() {
     fetchEmotion();
   }, []);
 
-  // 🔹 Handle add/update
+  // Handle add/update
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
@@ -69,7 +70,7 @@ export default function EmotionSectionAdmin() {
     fetchEmotion();
   };
 
-  // 🔹 Handle edit
+  // Handle edit
   const handleEdit = (item: Emotion) => {
     setForm({ ...item, imageLeftFile: null, imageRightFile: null });
     setPreviewLeft(item.image_left);
@@ -77,7 +78,7 @@ export default function EmotionSectionAdmin() {
     setIsEditing(true);
   };
 
-  // 🔹 Handle delete
+  // Handle delete
   const handleDelete = async (id: number) => {
     if (!confirm("Are you sure you want to delete this entry?")) return;
     await fetch("/api/emotion-section", {
@@ -88,7 +89,7 @@ export default function EmotionSectionAdmin() {
     fetchEmotion();
   };
 
-  // 🔹 Handle local file selection and preview
+  // Handle local file selection and preview
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, side: "left" | "right") => {
     const file = e.target.files?.[0] || null;
     if (side === "left") {
@@ -113,13 +114,21 @@ export default function EmotionSectionAdmin() {
             <div>
               <label>Left Image:</label>
               <Input type="file" accept="image/*" onChange={(e) => handleFileChange(e, "left")} />
-              {previewLeft && <img src={previewLeft} alt="Preview Left" className="w-32 mt-2 rounded-md" />}
+              {previewLeft && (
+                <div className="w-32 mt-2 relative h-32">
+                  <Image src={previewLeft} alt="Preview Left" fill className="object-cover rounded-md" />
+                </div>
+              )}
             </div>
 
             <div>
               <label>Right Image:</label>
               <Input type="file" accept="image/*" onChange={(e) => handleFileChange(e, "right")} />
-              {previewRight && <img src={previewRight} alt="Preview Right" className="w-32 mt-2 rounded-md" />}
+              {previewRight && (
+                <div className="w-32 mt-2 relative h-32">
+                  <Image src={previewRight} alt="Preview Right" fill className="object-cover rounded-md" />
+                </div>
+              )}
             </div>
 
             <Button type="submit">{isEditing ? "Update" : "Add"}</Button>
@@ -137,8 +146,16 @@ export default function EmotionSectionAdmin() {
                 <h4 className="text-sm text-gray-500">{item.subheading}</h4>
                 <p className="text-sm text-gray-600">{item.description}</p>
                 <div className="flex gap-2 mt-2">
-                  {item.image_left && <img src={item.image_left} alt="" className="w-24 rounded-md" />}
-                  {item.image_right && <img src={item.image_right} alt="" className="w-24 rounded-md" />}
+                  {item.image_left && (
+                    <div className="w-24 relative h-24">
+                      <Image src={item.image_left} alt={item.heading + " left"} fill className="object-cover rounded-md" />
+                    </div>
+                  )}
+                  {item.image_right && (
+                    <div className="w-24 relative h-24">
+                      <Image src={item.image_right} alt={item.heading + " right"} fill className="object-cover rounded-md" />
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="space-x-2">

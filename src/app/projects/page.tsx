@@ -5,6 +5,17 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { MapPin, Play, Pause, ArrowRight } from "lucide-react";
 
+// ✅ Define a proper type for your project data
+interface ProjectData {
+  id?: number | string;
+  title: string;
+  description: string;
+  heading?: string;
+  list?: string;
+  location: string;
+  images: string[];
+}
+
 // ✅ ProjectCard Component
 const ProjectCard = ({
   title,
@@ -148,7 +159,8 @@ const Project = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(true);
 
-  const [projects, setProjects] = useState<any[]>([]);
+  // 🔧 Fixed: Strongly typed ProjectData instead of any[]
+  const [projects, setProjects] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -164,14 +176,19 @@ const Project = () => {
     const fetchProjects = async () => {
       try {
         const res = await fetch("/api/projects");
-        const data = await res.json();
+        const data: { projects?: ProjectData[]; error?: string } = await res.json();
 
         if (!res.ok) throw new Error(data.error || "Failed to fetch projects");
 
         setProjects(data.projects || []);
-      } catch (err: any) {
-        console.error("Error fetching projects:", err);
-        setError(err.message || "Failed to load projects");
+      } catch (err) {
+        if (err instanceof Error) {
+          console.error("Error fetching projects:", err.message);
+          setError(err.message || "Failed to load projects");
+        } else {
+          console.error("Unknown error fetching projects:", err);
+          setError("Failed to load projects");
+        }
       } finally {
         setLoading(false);
       }
@@ -208,11 +225,7 @@ const Project = () => {
       {/* Projects Section */}
       <section className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-[88px] py-16 md:py-24">
         {loading && <p className="text-center text-muted">Loading projects...</p>}
-        {error && (
-          <p className="text-center text-red-500">
-            ❌ {error}
-          </p>
-        )}
+        {error && <p className="text-center text-red-500">❌ {error}</p>}
         {!loading && !error && projects.length === 0 && (
           <p className="text-center text-muted">No projects found.</p>
         )}

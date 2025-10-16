@@ -1,17 +1,60 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Hero from "@/components/Hero";
-import Contact from "@/components/Contact";
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import Hero from "@/components/Hero"
+import Contact from "@/components/Contact"
 
 export default function Home() {
-  const [introData, setIntroData] = useState<any[]>([]);
-  const [emotionData, setEmotionData] = useState<any[]>([]);
-  const [layersData, setLayersData] = useState<any[]>([]);
-  const [aboutData, setAboutData] = useState<any[]>([]);
-  const [latestData, setLatestData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  interface IntroItem {
+    id?: number
+    heading: string
+    description: string
+    image_url?: string | null
+  }
+
+  interface EmotionItem {
+    id?: number
+    heading: string
+    subheading: string
+    description: string
+    image_left?: string | null
+    image_right?: string | null
+  }
+
+  interface LayersItem {
+    id?: number
+    heading: string
+    tagline: string
+    description: string
+    list_items?: string | null
+    image_top?: string | null
+    image_bottom?: string | null
+  }
+
+  interface AboutItem {
+    id?: number
+    heading: string
+    description_1: string
+    description_2: string
+    image_url?: string | null
+  }
+
+  interface LatestCreationItem {
+    id?: number
+    title: string
+    comment: string
+    image_url?: string | null
+    alt_text: string
+    sort_order?: number
+  }
+
+  const [introData, setIntroData] = useState<IntroItem[]>([])
+  const [emotionData, setEmotionData] = useState<EmotionItem[]>([])
+  const [layersData, setLayersData] = useState<LayersItem[]>([])
+  const [aboutData, setAboutData] = useState<AboutItem[]>([])
+  const [latestData, setLatestData] = useState<LatestCreationItem[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchSections() {
@@ -20,202 +63,242 @@ export default function Home() {
           fetch("/api/intro-section"),
           fetch("/api/emotion-section"),
           fetch("/api/layers-section"),
-          fetch("/api/about-section"), // ✅ Added
+          fetch("/api/about-section"),
           fetch("/api/latest-creations"),
-        ]);
+        ])
 
-        const introJson = await introRes.json();
-        const emotionJson = await emotionRes.json();
-        const layersJson = await layersRes.json();
-        const aboutJson = await aboutRes.json(); // ✅ Added
-        const latestJson = await latestRes.json();
+        const introJson = await introRes.json()
+        const emotionJson = await emotionRes.json()
+        const layersJson = await layersRes.json()
+        const aboutJson = await aboutRes.json()
+        const latestJson = await latestRes.json()
 
-        if (!introRes.ok) throw new Error(introJson.error || "Failed to load intro section");
-        if (!emotionRes.ok) throw new Error(emotionJson.error || "Failed to load emotion section");
-        if (!layersRes.ok) throw new Error(layersJson.error || "Failed to load layers section");
-        if (!aboutRes.ok) throw new Error(aboutJson.error || "Failed to load about section"); // ✅ Added
-        if (!latestRes.ok) throw new Error(latestJson.error || "Failed to load latest creations");
+        if (!introRes.ok) throw new Error(introJson.error || "Failed to load intro section")
+        if (!emotionRes.ok) throw new Error(emotionJson.error || "Failed to load emotion section")
+        if (!layersRes.ok) throw new Error(layersJson.error || "Failed to load layers section")
+        if (!aboutRes.ok) throw new Error(aboutJson.error || "Failed to load about section")
+        if (!latestRes.ok) throw new Error(latestJson.error || "Failed to load latest creations")
 
-        setIntroData(introJson);
-        setEmotionData(emotionJson);
-        setLayersData(layersJson);
-        setAboutData(aboutJson); // ✅ Added
-        setLatestData(latestJson);
+        setIntroData(introJson)
+        setEmotionData(emotionJson)
+        setLayersData(layersJson)
+        setAboutData(aboutJson)
+        setLatestData(latestJson)
       } catch (err) {
-        console.error("❌ Error loading sections:", err);
+        console.error("❌ Error loading sections:", err)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
     }
 
-    fetchSections();
-  }, []);
+    fetchSections()
+  }, [])
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen text-[var(--neutral-700)] text-lg">
-        Loading content...
-      </div>
-    );
+      <div className="flex justify-center items-center min-h-screen text-foreground text-lg">Loading content...</div>
+    )
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <main>
         <Hero />
 
-        {/* Intro Section */}
+        {/* Intro Section - Modern Clean Layout */}
         {introData.length > 0 && (
-          <section aria-labelledby="intro-heading" className="px-4 sm:px-8 md:px-28 py-20 text-center">
-            <h2 className="text-[var(--neutral-700)] font-serif text-[36px] sm:text-[48px] md:text-[55px] font-semibold">
-              {introData[0].heading}
-            </h2>
-            <Image
-              src={introData[0].image_url || "/Images/image1.jpg"}
-              alt="Intro image"
-              width={1300}
-              height={900}
-              className="mt-8 mx-auto rounded-xl shadow-md"
-            />
-            <p className="text-[var(--neutral-600)] text-[18px] sm:text-[20px] md:text-[22px] mt-6 leading-relaxed">
-              {introData[0].description}
-            </p>
-          </section>
-        )}
-
-        {/* Emotion Section */}
-        {emotionData.length > 0 && (
-          <section className="flex flex-col lg:flex-row justify-center items-center px-4 py-16 gap-8">
-            <div className="py-8 md:py-16 max-w-xl">
-              <h2 className="text-[var(--neutral-900)] font-serif text-[32px] sm:text-[42px] md:text-[48px] font-semibold mb-6">
-                {emotionData[0].heading}
+          <section aria-labelledby="intro-heading" className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
+            <div className="max-w-6xl mx-auto">
+              <h2
+                id="intro-heading"
+                className="text-foreground font-sans text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-center mb-12 sm:mb-16"
+              >
+                {introData[0].heading}
               </h2>
-              <h3 className="text-[var(--brand-gold)] font-semibold mb-4">{emotionData[0].subheading}</h3>
-              <p className="text-[var(--neutral-600)] text-[16px] leading-relaxed">{emotionData[0].description}</p>
-            </div>
-            <div className="flex gap-6">
-              <Image
-                src={emotionData[0].image_left || "/Images/image1.jpg"}
-                alt="Emotion left image"
-                height={700}
-                width={300}
-                className="rounded-xl shadow"
-              />
-              <Image
-                src={emotionData[0].image_right || "/Images/variant1.jpg"}
-                alt="Emotion right image"
-                height={700}
-                width={300}
-                className="rounded-xl shadow"
-              />
-            </div>
-          </section>
-        )}
 
-        {/* Layers Section */}
-        {layersData.length > 0 && (
-          <section className="relative py-20 px-4 sm:px-8 md:px-28 flex flex-col lg:flex-row items-center justify-between gap-12 bg-[var(--bg-cream)]">
-            <div className="relative flex-shrink-0">
-              <Image
-                src={layersData[0].image_bottom || "/Images/image2.jpg"}
-                alt="Layers bottom"
-                width={350}
-                height={350}
-                className="absolute top-16 mt-48 left-0 opacity-80"
-              />
-              <Image
-                src={layersData[0].image_top || "/Images/variant2.jpg"}
-                alt="Layers top"
-                width={350}
-                height={350}
-                className="relative z-10 ml-8 lg:ml-24"
-              />
-            </div>
-            <div className="max-w-xl mt-12 lg:mt-48">
-              <h2 className="text-[var(--neutral-900)] font-serif text-[32px] sm:text-[38px] md:text-[42px] font-semibold mb-4">
-                {layersData[0].heading}
-              </h2>
-              <h3 className="text-[var(--brand-gold)] text-base md:text-lg font-semibold mb-6">
-                {layersData[0].tagline}
-              </h3>
-              <p className="text-[var(--neutral-600)] text-[16px] md:text-[18px] leading-relaxed mb-6">
-                {layersData[0].description}
+              <div className="mb-12 sm:mb-16">
+                <Image
+                  src={introData[0].image_url || "/placeholder.svg?height=600&width=1200&query=interior design"}
+                  alt="Intro image"
+                  width={1200}
+                  height={600}
+                  className="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+                />
+              </div>
+
+              <p className="text-secondary text-center text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto">
+                {introData[0].description}
               </p>
-              {layersData[0].list_items && (
-                <ul className="text-[var(--neutral-700)] text-[16px] space-y-2">
-                  {layersData[0].list_items.split("\n").map((item: string, index: number) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-              )}
             </div>
           </section>
         )}
 
-        {/* About Section */}
-        {aboutData.length > 0 && (
-          <section className="w-full bg-[var(--bg-cream)] py-20 relative" aria-labelledby="about-heading">
-            <div className="relative w-full flex justify-center items-center mt-10">
-              <Image
-                src={aboutData[0].image_url || "/Images/project4.jpg"}
-                width={1510}
-                height={700}
-                className="w-[1510px] h-[300px] md:h-[700px] object-cover shadow-lg rounded-xl"
-                alt="About image"
-              />
-              <div className="absolute -bottom-40 md:-bottom-44 bg-white w-[92%] md:w-[1300px] flex flex-col lg:flex-row justify-between px-6 sm:px-10 md:px-16 py-10 md:py-14 shadow-lg rounded-xl">
-                <div className="w-full lg:w-[35%] relative">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-10 h-[2px] bg-[var(--brand-gold)]" />
-                    <p className="text-[var(--brand-gold)] font-sans text-lg md:text-xl">About Us</p>
-                  </div>
-                  <h2 className="text-[var(--neutral-900)] font-serif text-[32px] sm:text-[38px] md:text-[42px] font-bold leading-snug mb-8 md:mb-10">
-                    {aboutData[0].heading}
+        {/* Emotion Section - Balanced Grid Layout */}
+        {emotionData.length > 0 && (
+          <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28 bg-muted/30">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div className="order-2 lg:order-1">
+                  <h2 className="text-foreground font-sans text-3xl sm:text-4xl lg:text-4xl font-light tracking-tight mb-6">
+                    {emotionData[0].heading}
                   </h2>
+                  <p className="text-accent font-medium text-sm sm:text-base mb-6 uppercase tracking-wide">
+                    {emotionData[0].subheading}
+                  </p>
+                  <p className="text-secondary text-base sm:text-lg leading-relaxed">{emotionData[0].description}</p>
                 </div>
-                <div className="w-full lg:w-[60%] mt-6 lg:mt-0">
-                  <p className="text-[var(--neutral-600)] text-[16px] md:text-[17px] leading-relaxed mb-4">
-                    {aboutData[0].description_1}
-                  </p>
-                  <p className="text-[var(--neutral-600)] text-[16px] md:text-[17px] leading-relaxed">
-                    {aboutData[0].description_2}
-                  </p>
+
+                <div className="order-1 lg:order-2 grid grid-cols-2 gap-4 sm:gap-6">
+                  <Image
+                    src={
+                      emotionData[0].image_left || "/placeholder.svg?height=400&width=300&query=interior design detail"
+                    }
+                    alt="Emotion left image"
+                    height={400}
+                    width={300}
+                    className="w-full h-auto rounded-lg shadow-sm object-cover"
+                  />
+                  <Image
+                    src={
+                      emotionData[0].image_right || "/placeholder.svg?height=400&width=300&query=interior design space"
+                    }
+                    alt="Emotion right image"
+                    height={400}
+                    width={300}
+                    className="w-full h-auto rounded-lg shadow-sm object-cover"
+                  />
                 </div>
               </div>
             </div>
           </section>
         )}
 
-        {/* Latest Creations Section */}
+        {/* Layers Section - Modern Asymmetric Layout */}
+        {layersData.length > 0 && (
+          <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28 bg-background">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div className="order-2 lg:order-1 relative h-96 sm:h-[500px] lg:h-[600px]">
+                  <Image
+                    src={
+                      layersData[0].image_bottom ||
+                      "/placeholder.svg?height=500&width=400&query=interior design texture"
+                    }
+                    alt="Layers bottom"
+                    width={400}
+                    height={500}
+                    className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-md opacity-70"
+                  />
+                  <Image
+                    src={
+                      layersData[0].image_top || "/placeholder.svg?height=500&width=400&query=interior design element"
+                    }
+                    alt="Layers top"
+                    width={400}
+                    height={500}
+                    className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-lg"
+                  />
+                </div>
+
+                <div className="order-1 lg:order-2">
+                  <h2 className="text-foreground font-sans text-3xl sm:text-4xl lg:text-4xl font-light tracking-tight mb-4">
+                    {layersData[0].heading}
+                  </h2>
+                  <p className="text-accent font-medium text-sm sm:text-base mb-6 uppercase tracking-wide">
+                    {layersData[0].tagline}
+                  </p>
+                  <p className="text-secondary text-base sm:text-lg leading-relaxed mb-8">
+                    {layersData[0].description}
+                  </p>
+                  {layersData[0].list_items && (
+                    <ul className="space-y-3">
+                      {layersData[0].list_items.split("\n").map((item: string, index: number) => (
+                        <li key={index} className="text-foreground text-base flex items-start gap-3">
+                          <span className="text-accent font-semibold mt-1">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* About Section - Full Width Image with Overlay Card */}
+        {aboutData.length > 0 && (
+          <section className="w-full py-16 sm:py-20 lg:py-28 bg-muted/30" aria-labelledby="about-heading">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="relative">
+                <Image
+                  src={aboutData[0].image_url || "/placeholder.svg?height=600&width=1200&query=interior design project"}
+                  width={1200}
+                  height={600}
+                  className="w-full h-auto rounded-lg shadow-md object-cover"
+                  alt="About image"
+                />
+
+                <div className="mt-8 sm:mt-12 bg-background rounded-lg shadow-md p-8 sm:p-12 lg:p-16">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+                    <div>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-12 h-px bg-accent" />
+                        <p className="text-accent font-medium text-sm uppercase tracking-wide">About Us</p>
+                      </div>
+                      <h2
+                        id="about-heading"
+                        className="text-foreground font-sans text-2xl sm:text-3xl lg:text-3xl font-light tracking-tight leading-snug"
+                      >
+                        {aboutData[0].heading}
+                      </h2>
+                    </div>
+                    <div className="lg:col-span-2">
+                      <p className="text-secondary text-base sm:text-lg leading-relaxed mb-6">
+                        {aboutData[0].description_1}
+                      </p>
+                      <p className="text-secondary text-base sm:text-lg leading-relaxed">
+                        {aboutData[0].description_2}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Latest Creations Section - Modern Grid Gallery */}
         {latestData.length > 0 && (
-          <section className="w-full bg-[var(--bg-cream)] py-24 px-4 sm:px-10">
-            <div className="max-w-[1300px] mx-auto text-center">
-              <div className="flex items-center justify-center mb-10 md:mb-12">
-                <span className="w-16 h-[2px] bg-[var(--brand-gold)] mr-4" />
-                <h2 className="text-[var(--neutral-900)] font-serif text-[32px] sm:text-[38px] md:text-[42px] font-semibold">
+          <section className="w-full py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-background">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-16 sm:mb-20">
+                <h2 className="text-foreground font-sans text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight">
                   Our Latest Creations
                 </h2>
-                <span className="w-16 h-[2px] bg-[var(--brand-gold)] ml-4" />
+                <div className="flex items-center justify-center gap-4 mt-6">
+                  <div className="w-12 h-px bg-accent" />
+                  <p className="text-accent font-medium text-sm uppercase tracking-wide">Explore Our Work</p>
+                  <div className="w-12 h-px bg-accent" />
+                </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 {latestData.map((card, index) => (
                   <div
                     key={card.id || index}
-                    className="relative overflow-hidden rounded-xl shadow-md group cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl"
+                    className="group relative overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-all duration-300"
                   >
                     <Image
-                      src={card.image_url || "/Images/placeholder.svg"}
+                      src={card.image_url || "/placeholder.svg?height=400&width=400&query=interior design project"}
                       alt={card.alt_text || card.title}
-                      width={600}
-                      height={600}
-                      className="w-full h-[280px] md:h-[350px] object-cover transition-transform duration-500 group-hover:scale-110"
+                      width={400}
+                      height={400}
+                      className="w-full h-64 sm:h-72 object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-x-0 bottom-6 flex justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-10 px-2">
-                      <div className="relative bg-white/95 backdrop-blur text-[var(--neutral-900)] text-sm font-medium px-4 py-3 rounded-lg shadow-lg w-full max-w-[260px]">
-                        <div className="font-semibold mb-1 text-[15px]">{card.title}</div>
-                        <div className="text-[var(--neutral-700)]">{card.comment}</div>
-                        <div className="absolute left-1/2 bottom-[-6px] -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-white" />
-                      </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                      <h3 className="text-white font-medium text-lg mb-2">{card.title}</h3>
+                      <p className="text-white/90 text-sm">{card.comment}</p>
                     </div>
                   </div>
                 ))}
@@ -227,5 +310,5 @@ export default function Home() {
         <Contact />
       </main>
     </div>
-  );
+  )
 }

@@ -45,6 +45,48 @@
       "namedRegex": "^/admin/hero(?:/)?$"
     },
     {
+      "page": "/admin/hero/about_section",
+      "regex": "^/admin/hero/about_section(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/hero/about_section(?:/)?$"
+    },
+    {
+      "page": "/admin/hero/emotion_section",
+      "regex": "^/admin/hero/emotion_section(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/hero/emotion_section(?:/)?$"
+    },
+    {
+      "page": "/admin/hero/intro_section",
+      "regex": "^/admin/hero/intro_section(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/hero/intro_section(?:/)?$"
+    },
+    {
+      "page": "/admin/hero/latest_creations",
+      "regex": "^/admin/hero/latest_creations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/hero/latest_creations(?:/)?$"
+    },
+    {
+      "page": "/admin/hero/layers_section",
+      "regex": "^/admin/hero/layers_section(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/hero/layers_section(?:/)?$"
+    },
+    {
+      "page": "/admin/projects",
+      "regex": "^/admin/projects(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/projects(?:/)?$"
+    },
+    {
+      "page": "/admin/services",
+      "regex": "^/admin/services(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/services(?:/)?$"
+    },
+    {
       "page": "/contact",
       "regex": "^/contact(?:/)?$",
       "routeKeys": {},

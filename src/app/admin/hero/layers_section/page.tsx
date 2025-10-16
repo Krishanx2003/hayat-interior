@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image"; // ✅ Import Next.js Image
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -43,7 +44,7 @@ export default function LayersSectionAdmin() {
   const [previewTop, setPreviewTop] = useState("");
   const [previewBottom, setPreviewBottom] = useState("");
 
-  // 🔹 Fetch all records
+  // Fetch all records
   const fetchLayers = async () => {
     const res = await fetch("/api/layers-section");
     const data = await res.json();
@@ -54,7 +55,7 @@ export default function LayersSectionAdmin() {
     fetchLayers();
   }, []);
 
-  // 🔹 Handle add/update
+  // Handle add/update
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
@@ -82,7 +83,7 @@ export default function LayersSectionAdmin() {
     fetchLayers();
   };
 
-  // 🔹 Handle edit
+  // Handle edit
   const handleEdit = (item: Layer) => {
     setForm({ ...item, imageTopFile: null, imageBottomFile: null });
     setPreviewTop(item.image_top);
@@ -90,7 +91,7 @@ export default function LayersSectionAdmin() {
     setIsEditing(true);
   };
 
-  // 🔹 Handle delete
+  // Handle delete
   const handleDelete = async (id: number) => {
     if (!confirm("Are you sure you want to delete this entry?")) return;
     await fetch("/api/layers-section", {
@@ -101,7 +102,7 @@ export default function LayersSectionAdmin() {
     fetchLayers();
   };
 
-  // 🔹 Handle file change
+  // Handle file change
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, position: "top" | "bottom") => {
     const file = e.target.files?.[0] || null;
     if (position === "top") {
@@ -127,13 +128,21 @@ export default function LayersSectionAdmin() {
             <div>
               <label>Top Image:</label>
               <Input type="file" accept="image/*" onChange={(e) => handleFileChange(e, "top")} />
-              {previewTop && <img src={previewTop} alt="Preview Top" className="w-32 mt-2 rounded-md" />}
+              {previewTop && (
+                <div className="w-32 mt-2 relative h-32">
+                  <Image src={previewTop} alt="Preview Top" fill className="object-cover rounded-md" />
+                </div>
+              )}
             </div>
 
             <div>
               <label>Bottom Image:</label>
               <Input type="file" accept="image/*" onChange={(e) => handleFileChange(e, "bottom")} />
-              {previewBottom && <img src={previewBottom} alt="Preview Bottom" className="w-32 mt-2 rounded-md" />}
+              {previewBottom && (
+                <div className="w-32 mt-2 relative h-32">
+                  <Image src={previewBottom} alt="Preview Bottom" fill className="object-cover rounded-md" />
+                </div>
+              )}
             </div>
 
             <Button type="submit">{isEditing ? "Update" : "Add"}</Button>
@@ -158,8 +167,16 @@ export default function LayersSectionAdmin() {
                   </ul>
                 )}
                 <div className="flex gap-2 mt-2">
-                  {item.image_top && <img src={item.image_top} alt="" className="w-24 rounded-md" />}
-                  {item.image_bottom && <img src={item.image_bottom} alt="" className="w-24 rounded-md" />}
+                  {item.image_top && (
+                    <div className="w-24 relative h-24">
+                      <Image src={item.image_top} alt="Top Image" fill className="object-cover rounded-md" />
+                    </div>
+                  )}
+                  {item.image_bottom && (
+                    <div className="w-24 relative h-24">
+                      <Image src={item.image_bottom} alt="Bottom Image" fill className="object-cover rounded-md" />
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="space-x-2">

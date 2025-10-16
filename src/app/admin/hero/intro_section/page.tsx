@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image"; // ✅ Import Next.js Image
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,7 +26,7 @@ export default function IntroSectionAdmin() {
   const [isEditing, setIsEditing] = useState(false);
   const [preview, setPreview] = useState<string>("");
 
-  // 🔹 Fetch all records
+  // Fetch all records
   const fetchIntro = async () => {
     const res = await fetch("/api/intro-section");
     const data = await res.json();
@@ -36,7 +37,7 @@ export default function IntroSectionAdmin() {
     fetchIntro();
   }, []);
 
-  // 🔹 Handle add/update
+  // Handle add/update
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -60,14 +61,14 @@ export default function IntroSectionAdmin() {
     fetchIntro();
   };
 
-  // 🔹 Handle edit
+  // Handle edit
   const handleEdit = (item: Intro) => {
     setForm({ ...item, imageFile: null });
     setPreview(item.image_url);
     setIsEditing(true);
   };
 
-  // 🔹 Handle delete
+  // Handle delete
   const handleDelete = async (id: number) => {
     await fetch("/api/intro-section", {
       method: "DELETE",
@@ -77,7 +78,7 @@ export default function IntroSectionAdmin() {
     fetchIntro();
   };
 
-  // 🔹 Handle local file selection and preview
+  // Handle local file selection and preview
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     setForm({ ...form, imageFile: file });
@@ -101,7 +102,11 @@ export default function IntroSectionAdmin() {
               onChange={(e) => setForm({ ...form, description: e.target.value })}
             />
             <Input type="file" accept="image/*" onChange={handleFileChange} />
-            {preview && <img src={preview} alt="Preview" className="w-32 mt-2 rounded-md" />}
+            {preview && (
+              <div className="w-32 mt-2 relative h-32">
+                <Image src={preview} alt="Preview" fill className="object-cover rounded-md" />
+              </div>
+            )}
             <Button type="submit">{isEditing ? "Update" : "Add"}</Button>
           </form>
         </CardContent>
@@ -115,7 +120,11 @@ export default function IntroSectionAdmin() {
               <div>
                 <h3 className="font-semibold">{item.heading}</h3>
                 <p className="text-sm text-gray-600">{item.description}</p>
-                {item.image_url && <img src={item.image_url} alt="" className="w-32 mt-2 rounded-md" />}
+                {item.image_url && (
+                  <div className="w-32 mt-2 relative h-32">
+                    <Image src={item.image_url} alt={item.heading} fill className="object-cover rounded-md" />
+                  </div>
+                )}
               </div>
               <div className="space-x-2">
                 <Button variant="outline" onClick={() => handleEdit(item)}>
